@@ -1,0 +1,39 @@
+{%extends "base.html"%}
+
+{%block main_block%}
+
+<h1>Total Tasks : {{total_task_count}}</h1>
+
+<div class="border">
+
+    <h3>Category Summary</h3>
+
+    {%for cs in category_summary%}
+
+    <div>
+
+        {{cs.category}} : {{cs.cat_count}}
+
+    </div>
+
+    {%endfor%}
+
+</div>
+
+<div class="border"></div>
+
+    <h3>Status Summary</h3>
+
+    {%for ss in status_summary%}
+
+    <div>
+
+        {{ss.status}} : {{ss.stat_count}}
+
+    </div>
+
+    {%endfor%}
+
+</div>
+
+{%endblock%} 

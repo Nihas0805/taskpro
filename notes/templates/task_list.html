@@ -1,0 +1,81 @@
+{%extends 'base.html'%}
+
+{%block main_block%}
+
+<div class="container my-5">
+
+    <div class="w-50 mx-auto">
+
+        
+        
+           
+
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+    {%for t in tasks%}
+
+    <div class="col-4 mt-5">
+
+        <div class="card text-bg-white mb-3" style="max-width: 18rem;">
+            <div class="card-header d-flex justify-content-between bg-info">
+                <div><b>{{t.user}}</b></div>
+                <div>
+                    {%if t.status == 'pending'%}
+
+                    <div class="spinner-border text-danger" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                      </div>
+
+                    {%endif%}
+
+                    {%if t.status == 'in-progress'%}
+
+                    <div class="spinner-border text-warning" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                      </div>
+                    
+                    {%endif%}
+
+                    {%if t.status == 'done'%}
+
+                    <div class="spinner-border text-success" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                      </div>
+                    
+                    {%endif%}
+                    
+                    {{t.status}}</div>
+            </div>
+            <div class="card-body bg-light text-dark">
+                <h5 class="card-title">{{t.title}}</h5>
+                <p class="card-text">{{t.description}}</p>
+            </div>
+            <div class="card-footer text-body-white bg-info">
+                Created_date:{{t.created_date|date}}
+
+                Last_updated:{{t.updated_date|date}}
+                
+                Due_date:{{t.due_date|date}}<br>
+
+                <div class="container d-flex justify-content-between">
+                <a href="{%url 'task-update' t.id%}" class="btn btn-light mt-2 text-dark">View</a>
+                <a href="{%url 'task-delete' t.id%}" class="btn btn-light mt-2 text-dark">Delete</a>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    
+
+    {%endfor%}
+    </div>
+    
+
+
+</div>
+
+{%endblock%}

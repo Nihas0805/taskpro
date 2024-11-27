@@ -1,0 +1,71 @@
+{%extends 'base.html'%}
+
+
+{%block main_block%}
+
+<div class="container mt-2">
+    <center><u><h1>Summary</h1></u></center>
+    <div class="row mt-5">
+
+    <div class="col-5"><center><h2>Status</h2></center><canvas id="statuschart"></canvas></div>
+    <div class="col-2"></div>
+    <div class="col-5"><center><h2>Category</h2></center><canvas id="myChart"></canvas></div>
+</div></div>
+
+{%endblock%}
+
+{%block script_block%}
+
+<script>
+    const ctx = document.getElementById('myChart');
+  
+    new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: [{%for cs in category_summary%} '{{cs.category}}', {%endfor%} ],
+        datasets: [{
+          label: '# of Votes',
+          data: [{%for cs in category_summary%} '{{cs.cat_count}}', {%endfor%} ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    // status chart
+
+    const ctx1 = document.getElementById('statuschart');
+  
+    new Chart(ctx1, {
+      type: 'doughnut',
+      data: {
+        labels: [{%for ss in status_summary%} '{{ss.status}}', {%endfor%}],
+        datasets: [{
+          label: '# of Votes',
+          data: [{%for ss in status_summary%} '{{ss.stat_count}}', {%endfor%}],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+
+
+{%endblock%}
+
+
+
+
+
